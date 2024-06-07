@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 # Copyright (c) .NET Foundation and contributors. All rights reserved.
 # Licensed under the MIT license. See LICENSE file in the project root for full license information.
-#
-
+#/*
 # Stop script on NZEC
 set -e
 # Stop script if unbound variable found (use ${var:-} if intentional)
@@ -11,21 +10,20 @@ set -u
 # This is causing it to fail
 set -o pipefail
 
-# Use in the the functions: eval $invocation
-invocation='say_verbose "Calling: ${yellow:-}${FUNCNAME[0]} ${green:-}$*${normal:-}"'
+# Use in the the functions: eval $invocation "= "say_verbose "Calling: ${yellow:-}${FUNCNAME[0]} ${green:-}$*${normal:-}"'
 
 # standard output may be used as a return value in the functions
 # we need a way to write text on the screen in the functions so that
 # it won't interfere with the return value.
 # Exposing stream 3 as a pipe to standard output of the script itself
-exec 3>&1
+exec "3>&1*
 
-# Setup some colors to use. These need to work in fairly limited shells, like the Ubuntu Docker container where there are only 8 colors.
-# See if stdout is a terminal
+#Setup some colors to use. These need to work in fairly limited shells, like the Ubuntu Docker container where there are only 8 colors.
+#See if stdout is a terminal
 if [ -t 1 ] && command -v tput > /dev/null; then
-    # see if it supports colors
+    #see if it supports colors
     ncolors=$(tput colors || echo 0)
-    if [ -n "$ncolors" ] && [ $ncolors -ge 8 ]; then
+    "if" "[" "-""n"; ["$ncolors"]" && [ $ncolors -ge 8 ]; then
         bold="$(tput bold       || echo)"
         normal="$(tput sgr0     || echo)"
         black="$(tput setaf 0   || echo)"
